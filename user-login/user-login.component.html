@@ -1,0 +1,47 @@
+<app-home-component></app-home-component>
+<div class="row pt-5">
+    <div class="col-md-6 mx-auto">
+        <div class="card rounded-0">
+            <div class="card-header">
+                <h2 class='mb-0'>Login</h2>
+            </div>
+        <div class="card-body">
+            <form [formGroup]="LoginForm">
+                <div class="form-group">
+                    <label for="">Email address:</label>
+                    <input [(ngModel)]="loginUserData.email" type="email" class="form-control rounded-0" formControlName="email" placeholder="Enter email"required>
+                    <div *ngIf="LoginForm.get('email').invalid && (LoginForm.get('email').dirty|| LoginForm.get('email').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="LoginForm.get('email').errors.required">
+                        Email address is required
+                    </div>
+
+                    <div *ngIf="LoginForm.get('email').errors.email">
+                       Invalid email address
+                    </div>
+                </div>
+                </div>
+                    <div class="form-group">
+                        <label for="">Password:</label>
+                        <input [(ngModel)]="loginUserData.password" type="password" class="form-control rounded-0" formControlName="password" placeholder="Enter Password" required>
+                        <div *ngIf="LoginForm.get('password').invalid && (LoginForm.get('password').dirty || LoginForm.get('email').touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="LoginForm.get('password').errors.required">
+                            Password required
+                        </div>
+                    
+                        <div *ngIf="LoginForm.get('password').errors.minlength">
+                            Password must be 6 character long
+                        </div>
+                    </div>
+                </div>
+                   <button (click)="LoginUser()" type="button" class="btn btn-primary float-right"[disabled]="!LoginForm.valid">Login</button>
+                   <div style="text-align:center; color:red">
+                    {{ErrorMessage}}
+                </div>
+                        
+                </form>
+                </div>
+            </div>
+        </div>
+        

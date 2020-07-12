@@ -1,0 +1,78 @@
+<app-home-component></app-home-component>
+<div class="row pt-5">
+    <div class="col-md-6 mx-auto">
+        <div class="card rounded-0">
+            <div class="card-header">
+                <h2 class='mb-0'>Register</h2>
+            </div>
+
+        <div class="card-body">
+            <form (ngSubmit)="onSubmit()"[formGroup]="SignupForm">
+                <div class="form-group">
+                <label for="">UserName:</label>
+                <input [(ngModel)]="registerUserData.username" type="text" name="username" class="form-control rounded-0" formControlName="Username" placeholder="Enter Username" required>
+                <div *ngIf="SignupForm.get('Username').invalid && (SignupForm.get('Username').dirty|| SignupForm.get('Username').touched)"
+                class="alert alert-danger">
+                <div *ngIf="SignupForm.get('Username').errors.required">
+                    <span>Name is required.</span>
+                  </div>
+                  <div *ngIf="SignupForm.get('Username').errors.minlength">
+                    Name must be at least 4 characters long.
+                  </div>
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="">Email address:</label>
+                <input [(ngModel)]="registerUserData.email" type="email" name="email"class=" form-control rounded-0" formControlName="email" placeholder="Enter email"required>
+                <div *ngIf="SignupForm.get('email').invalid && (SignupForm.get('email').dirty|| SignupForm.get('email').touched)"
+                class="alert alert-danger">
+                <div *ngIf="SignupForm.get('email').errors.required">
+                    Email address is required
+                </div>
+                <div *ngIf="SignupForm.get('email').errors.email">
+                   Invalid email address
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="">Password:</label>
+                <input [(ngModel)]="registerUserData.password" type="password" name="password" class="form-control rounded-0" formControlName="password" placeholder="Enter Password" required>
+                <div *ngIf="SignupForm.get('password').invalid && (SignupForm.get('password').dirty || SignupForm.get('password').touched)"
+                class="alert alert-danger">
+                <div *ngIf="SignupForm.get('password').errors.required">
+                    Password required
+                </div>
+            
+                <div *ngIf="SignupForm.get('password').errors.minlength">
+                    Password must be 6 character long
+                </div>
+            </div>
+        </div>
+        
+       <div class="form-group">
+            <label for="">ConfirmPassword:</label>
+            <input [(ngModel)]="registerUserData.Cpassword" type="password" class="form-control rounded-0" formControlName="Cpassword" >
+            <div *ngIf="SignupForm.get('Cpassword').invalid && (SignupForm.get('Cpassword').dirty || SignupForm.get('Cpassword').touched)"
+             class="alert alert-danger">
+              <div *ngIf="SignupForm.get('Cpassword').errors.required">
+               Confirm Password required
+            </div>
+            
+
+            <div *ngIf="Cpassword.valid && Cpassword.value !=password.value" class="alert alert-danger">
+                Password is not matching.
+            </div>
+           
+        </div>
+        </div>
+        <div>
+       <button (click)="registerUser()" type="button" class="btn btn-primary float-right"[disabled]="SignupForm.invalid">Register</button>     
+       </div>
+        <div style="text-align:center;color:green">
+        {{SucessMessage}}
+    </div>
+     </form>
+           
+        
+    </div>
+    </div>
